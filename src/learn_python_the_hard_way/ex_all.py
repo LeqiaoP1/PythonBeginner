@@ -16,8 +16,8 @@ def ex02():
     # print "This was't run."
     print "This will run."
     return None
-    
-    
+
+
 def ex03():
     print "I will now count my chickens:"
     print "Hens", 25 + 30 / 6
@@ -34,8 +34,8 @@ def ex03():
     print "Is it greater or equal?", 5 >= -2
     print "Is it less or equal?", 5 <= -2
     return None
-    
-    
+
+
 def ex10():
     tabby_cat = "\tI'm tabbed in."
     persian_cat = "I'm split\non a line."
@@ -51,8 +51,8 @@ def ex10():
     print backslash_cat
     print fat_cat
     return None
-    
-    
+
+
 def ex11():
     print "How old are you?",
     age = raw_input()
@@ -71,5 +71,87 @@ def ex13():
     print "Your second variable is:", second
     print "Your third variable is:", third
     print "Your fourth variable is:", fourth
-    
 
+    
+def ex15():
+    from sys import argv
+    """script, filename = argv
+    txt = open(filename)
+    print "Here's your file %r:" % filename
+    print txt.read()
+    """
+    print "Type the filename again:"
+    file_again = raw_input("> ")
+    txt_again = open(file_again)
+    
+    print txt_again.read()
+    txt_again.close()
+
+
+def ex21_add(a, b):
+    print "ADDING %d + %d" % (a, b)
+    return a + b
+
+
+def ex21_subtract(a, b):
+    print "SUBTRACTING %d - %d" % (a, b)
+    return a - b
+
+
+def ex21_multiply(a, b):
+    print "MULTIPLYING %d * %d" % (a, b)
+    return a * b
+
+
+def ex21_divide(a, b):
+    print "DIVIDING %d / %d" % (a, b)
+    return a / b
+
+
+class Ex26(object):
+    """ statish methods
+    """
+
+    def break_words(stuff):
+        """This function will break up words for us."""
+        words = stuff.split(' ')
+        return words
+
+    def sort_words(words):
+        """Sorts the words."""
+        return sorted(words)
+
+    def print_first_word(words):
+        """Prints the first word after popping it off."""
+        word = words.pop(0)
+        print word
+
+    def print_last_word(words):
+        """Prints the last word after popping it off."""
+        word = words.pop(-1)                      
+        print word
+
+    def sort_sentence(sentence):
+        """Takes in a full sentence and returns the sorted words."""
+        words = Ex26.break_words(sentence)
+        return Ex26.sort_words(words)
+    
+    def print_first_and_last(sentence):
+        """Prints the first and last words of the sentence."""
+        words = Ex26.break_words(sentence)
+        Ex26.print_first_word(words)
+        Ex26.print_last_word(words)
+
+    def print_first_and_last_sorted(sentence):
+        """Sorts the words then prints the first and last one."""
+        words = Ex26.sort_sentence(sentence)
+        Ex26.print_first_word(words)
+        Ex26.print_last_word(words)
+
+    break_words = staticmethod(break_words)
+    sort_words  = staticmethod(sort_words)
+    print_first_word = staticmethod(print_first_word)    
+    print_last_word = staticmethod(print_last_word)    
+    sort_sentence = staticmethod(sort_sentence)
+    print_first_and_last = staticmethod(print_first_and_last)
+    print_first_and_last_sorted = staticmethod(print_first_and_last_sorted)
