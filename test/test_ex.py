@@ -47,51 +47,39 @@ def test_ex21():
        
 
 class TestEx26(unittest.TestCase):
-    def __assertion_stdout(self, str_value):
-        """check the next 'Non empty line' against 'str_value'"""
-        while True:
-            line = sys.stdout.readline()
-            if line != '':
-                print line
-                self.assertEqual(line, str_value)
-                break
-            else:
-                break
-           
 
     def setUp(self):
         print '\n*** Run the "Ex. 26" ***\n'
-        self.held, sys.stdout = sys.stdout, StringIO()
+        self.held = sys.stdout
+        sys.stdout = StringIO()
+        
 
+    def tearDown(self):
+        sys.stdout = self.held
+        print '\n*** Done with "Ex.26" ***\n'
+        
 
-    def test_ex26(self):       
+    def test_ex26(self):                  
         sentence = "All god\tthings come to those who weight."
         words = ex_all.Ex26.break_words(sentence)
         sorted_words = ex_all.Ex26.sort_words(words)
-
-        ex_all.Ex26.print_first_word(words)
-        self.__assertion_stdout("All\n")     
-
+        ex_all.Ex26.print_first_word(words)        
         ex_all.Ex26.print_last_word(words)
-        self.__assertion_stdout("weight.\n")
-
         ex_all.Ex26.print_first_word(sorted_words)
-        self.__assertion_stdout("All\n")
-
         ex_all.Ex26.print_last_word(sorted_words)
-        self.__assertion_stdout("who1\n")
-       
+        '''      
         sorted_words = ex_all.Ex26.sort_sentence(sentence)
         print sorted_words
+        
+        ex_all.Ex26.print_first_and_last(sentence)
+        ex_all.Ex26.print_first_and_last_sorted(sentence)
+        '''     
+        lines = sys.stdout.getvalue().splitlines()
+        self.assertEquals(lines[0], "All")
+        self.assertEquals(lines[1], "weight.")
+        self.assertEquals(lines[2], "All")
+        self.assertEquals(lines[3], "who")
 
-        
-        
-"""
-  
-  
-    assert( ex_all.Ex26.print_first_and_last(sentence) == 'All\nweight')
-    assert( ex_all.Ex26.print_first_and_last_sorted(sentence) == ['All', 'who'])
-"""
 
 if __name__ == '__main__':
     import sys
