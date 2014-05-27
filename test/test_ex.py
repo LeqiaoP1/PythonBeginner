@@ -118,8 +118,10 @@ class TestEx42(unittest.TestCase):
         self.assertEquals(myEx42.do_task(), 2*3)
 
 
-from src.learn_python_the_hard_way.ex_all import lexicon
+
+
 from nose.tools import *
+from src.learn_python_the_hard_way.ex_all import lexicon
 class TestEx48(unittest.TestCase):
 
     def test_directions(self):
@@ -164,6 +166,26 @@ class TestEx48(unittest.TestCase):
         assert_equal(result, [('noun', 'bear'),
                               ('error', 'IAS'),
                               ('noun', 'princess')])
+
+
+
+from src.learn_python_the_hard_way.ex_all import Parser
+from src.learn_python_the_hard_way.ex_all import Sentence
+class TestParser(unittest.TestCase):
+
+    def test_1(self):
+        words_list = lexicon.scan("eat the bear")
+        sent = Parser.parse_sentence(words_list)
+        assert_equal(sent.subject, 'player')
+        assert_equal(sent.verb, 'eat')
+        assert_equal(sent.object, 'bear')
+
+    def test_2(self):
+        words_list = lexicon.scan("he kill the bear")
+        sent = Parser.parse_sentence(words_list)
+        assert_equal(sent.subject, 'VIP_P1')
+        assert_equal(sent.verb, 'kill')
+        assert_equal(sent.object, 'bear')
 
 
 

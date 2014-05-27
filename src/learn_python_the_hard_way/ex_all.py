@@ -193,8 +193,6 @@ class Ex42(object):
         self.thingB.add_me_up(op2)
 
     def do_task(self):
-        #print self.thingA.number
-        #print self.thingB.number
         return self.TheMultiplier(self.thingA.number).do_it(self.thingB.number)
 
 
@@ -204,10 +202,10 @@ class lexicon(object):
     directions = "north south east west down up left right back"
     verbs = "go stop kill eat"
     stops = "the in of"
-    nouns = "door bear princess cabinet"
+    nouns = "door bear princess cabinet VIP_P1"
     
     @staticmethod
-    def scan( input_str ):
+    def scan(input_str):
         words = input_str.split()
         ret_list = []
         for w in words:
@@ -224,9 +222,95 @@ class lexicon(object):
             else:
                 ret_list.append(('error', w))
 
-        return ret_list  
+        return ret_list
                 
     
-            
+class ParserError(Exception):
+    pass
 
-    
+
+class Sentence(object):
+
+    def __init__(self, subject, verb, object):
+        # remember we take ('noun','princess') tuples and convert them
+        self.subject = subject[1]
+        self.verb = verb[1]
+        self.object = object[1]
+
+
+class Parser(object):
+    """ for ex.49  """
+    @staticmethod
+    def peek(word_list):  # tuple list
+        if word_list:
+            word = word_list[0] # get the first one but not pop it up
+            return word[0]
+        else:
+            return None
+
+    @staticmethod
+    def match(word_list, expecting): # tuple list
+        if word_list:
+            word = word_list.pop(0) # pop the head tuple
+
+            if word[0] == expecting:
+                return word
+            else:
+                return None
+        else:
+            return None
+
+    @staticmethod
+    def skip(word_list, word_type):  # tuple list
+        # loop until empty list or first non-matched word-type
+        while Parser.peek(word_list) == word_type: 
+            Parser.match(word_list, word_type)
+
+    @staticmethod
+    def parse_verb(word_list):
+        Parser.skip(word_list, 'stop')
+
+        if Parser.peek(word_list) == 'verb':
+            return Parser.match(word_list, 'verb')
+        else:
+            raise ParserError("Expected a verb next.")
+
+    @staticmethod
+    def parse_object(word_list):
+        Parser.skip(word_list, 'stop')
+        next = Parser.peek(word_list)
+
+        if next == 'noun':
+            return Parser.match(word_list, 'noun')
+        if next == 'direction':
+            return Parser.match(word_list, 'direction')
+        else:
+            raise ParserError("Expected a noun or direction next.")
+
+    @staticmethod
+    def parse_subject(word_list, subj): # "subj" is already extracted
+        verb = Parser.parse_verb(word_list)
+        obj = Parser.parse_object(word_list)
+
+        return Sentence(subj, verb, obj)
+
+    @staticmethod
+    def parse_sentence(word_list):
+        Parser.skip(word_list, 'stop')
+        start = Parser.peek(word_list)
+
+        if start == 'noun':
+            subj = Parser.match(word_list, 'noun')
+            return Parser.parse_subject(word_list, subj)
+        elif start == 'verb':
+            # assume the subject is the player then
+            return Parser.parse_subject(word_list, ('noun', 'player'))
+        else:
+            raise ParserError("Must start with subject, object, or verb not: %s" % start)
+
+
+
+
+
+
+
