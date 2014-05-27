@@ -111,7 +111,6 @@ def ex21_divide(a, b):
 class Ex26(object):
     """ statish methods
     """
-
     def break_words(stuff):
         """This function will break up words for us."""
         words = stuff.split(' ')
@@ -149,9 +148,85 @@ class Ex26(object):
         Ex26.print_last_word(words)
 
     break_words = staticmethod(break_words)
-    sort_words  = staticmethod(sort_words)
-    print_first_word = staticmethod(print_first_word)    
-    print_last_word = staticmethod(print_last_word)    
+    sort_words = staticmethod(sort_words)
+    print_first_word = staticmethod(print_first_word)
+    print_last_word = staticmethod(print_last_word)
     sort_sentence = staticmethod(sort_sentence)
     print_first_and_last = staticmethod(print_first_and_last)
     print_first_and_last_sorted = staticmethod(print_first_and_last_sorted)
+
+
+class Ex40(object):
+    """ dictionary lookup"""
+    @staticmethod
+    def find_city(themap, state):
+        if state in themap:
+            print themap[state]
+        else:
+            print "Not found"
+
+
+class Ex42(object):
+    """ two nested classes """
+    class TheThing(object):
+        def __init__(self):
+            self.number = 0
+
+
+        def add_me_up(self, more):
+            self.number += more
+            return self.number
+
+
+    class TheMultiplier(object):
+        def __init__(self, base):
+            self.base = base
+        
+        def do_it(self, m):
+            return m * self.base
+    
+    """ main class """   
+    def __init__(self, op1, op2):
+        self.thingA = self.TheThing()
+        self.thingA.add_me_up(op1)
+        self.thingB = self.TheThing()
+        self.thingB.add_me_up(op2)
+
+    def do_task(self):
+        #print self.thingA.number
+        #print self.thingB.number
+        return self.TheMultiplier(self.thingA.number).do_it(self.thingB.number)
+
+
+
+class lexicon(object):
+    """ for exercise 48. """
+    directions = "north south east west down up left right back"
+    verbs = "go stop kill eat"
+    stops = "the in of"
+    nouns = "door bear princess cabinet"
+    
+    @staticmethod
+    def scan( input_str ):
+        words = input_str.split()
+        ret_list = []
+        for w in words:
+            if w in lexicon.directions.split():
+                ret_list.append(('direction', w))
+            elif w in lexicon.verbs.split():
+                ret_list.append(('verb', w))
+            elif w in lexicon.nouns.split():
+                ret_list.append(('noun', w))
+            elif w in lexicon.stops.split():
+                ret_list.append(('stop', w))
+            elif w.isdigit():
+                ret_list.append(('number', int(w)))
+            else:
+                ret_list.append(('error', w))
+
+        return ret_list  
+                
+    
+            
+
+    
