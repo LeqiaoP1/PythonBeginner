@@ -21,6 +21,22 @@ class TestAssn00(TestCase):
         self.assertEquals(lines[3], "peng")
        
 
+
+from src.introduction_to_computer_science_and_programming.assn01 import *
+class TestAssn01(TestCase):
+    """ Testcases for the assignment 01 """
+    def test_problem1(self):
+        self.assertEquals(ps1a.Prime.get_nth_prime(1), 2)
+        self.assertEquals(ps1a.Prime.get_nth_prime(1000), 7919)
+
+    def test_problem2(self):
+        self.assertEquals(ps1b.get_ratio(1) < ps1b.get_ratio(10), True)
+        self.assertEquals(ps1b.get_ratio(10) < ps1b.get_ratio(30), True)
+        self.assertEquals(ps1b.get_ratio(30) < ps1b.get_ratio(100), True)
+
+
+
+
 if __name__ == '__main__':
     import nose
     print "Arguments are: ", str(sys.args[0])
