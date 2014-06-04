@@ -36,6 +36,20 @@ class TestAssn01(TestCase):
 
 
 
+from src.introduction_to_computer_science_and_programming.assn02 import *
+class TestAssn02(TestCase):
+    """ Testcases for the assignment 02 """
+    def test_problem2a(self):
+        package = [6, 9, 20]
+        self.assertEquals(ps2a.is_solvable(0, package), True)
+        self.assertEquals(ps2a.is_solvable(1, package), False)
+        self.assertEquals(ps2a.is_solvable(43, package), False)
+
+    def test_problem2b(self):
+        ps2b.run()
+        self.assertEquals(ps2b.bestSoFar, 43)
+
+
 
 if __name__ == '__main__':
     import nose
