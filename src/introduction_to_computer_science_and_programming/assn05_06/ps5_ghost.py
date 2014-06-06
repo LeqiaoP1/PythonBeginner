@@ -30,6 +30,7 @@ def load_words():
     print "  ", len(wordlist), "words loaded."
     return wordlist
 
+
 def get_frequency_dict(sequence):
     """
     Returns a dictionary where the keys are elements of the sequence
@@ -54,4 +55,52 @@ def get_frequency_dict(sequence):
 # in the program.
 wordlist = load_words()
 
-# TO DO: your code begins here!
+
+def play_ghost():
+    """ play ghost game """
+
+    _PLAYERS = ['Player1', 'Player2']
+
+    def _prompt_for_one_more_letter(input_word, player_idx):
+        print "Word record now as: ", input_word
+        player = _PLAYERS[play_idx]
+        
+        while True:
+            letter = raw_input(player + ' is appending one letter >')
+            if (len(letter) > 0):
+                    break
+        
+        return input_word + letter[0]
+
+
+    def _check_lose_rule(input_word):
+        if (len(input_word) > 3) and (input_word in wordlist):
+            return True
+        else:
+            for word in wordlist:
+                if word.startswith(input_word):
+                    return False
+
+            return True
+
+    
+
+    # initial contiditon
+    input_word = ""
+    play_idx = 0
+    continue_play = True
+
+    while (continue_play):
+        input_word = _prompt_for_one_more_letter(input_word, play_idx)
+        if (_check_lose_rule(input_word) == True):
+            print _PLAYERS[play_idx] + ' has lost the game.'
+            if (raw_input("continue with another game? y or n >") == 'y'):
+                continue_play = True
+                input_word = ""
+                play_idx = 0
+            else:
+                continue_play = False
+        else:
+            play_idx = (play_idx + 1)%(len(_PLAYERS))
+
+
