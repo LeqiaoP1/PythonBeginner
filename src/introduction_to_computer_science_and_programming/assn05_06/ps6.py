@@ -16,6 +16,8 @@ SCRABBLE_LETTER_VALUES = {
     'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
+BONUS = 50
+
 # -----------------------------------
 # Helper code
 # (you don't need to understand this helper code)
@@ -96,6 +98,7 @@ def get_words_to_points(word_dict):
         sum_score = 0
         for letter in word:
             sum_score = sum_score + SCRABBLE_LETTER_VALUES.get(letter,0)
+
 
         ret_dict[word][1] = sum_score
 
@@ -227,6 +230,10 @@ def pick_best_word(hand, word_point_dict):
 
         if word_in_hand:
             score = word_point_dict[word][1]
+
+            if len(word) == HAND_SIZE:
+                score = score + BONUS
+
             if highest_score < score:
                 highest_score = score  
                 best_word = word_point_dict[word][0]
