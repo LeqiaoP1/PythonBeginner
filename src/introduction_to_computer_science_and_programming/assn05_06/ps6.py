@@ -7,6 +7,7 @@
 import random
 import string
 import time
+import itertools
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -250,12 +251,38 @@ def rearrange_dict(word_list):
     return d
 
 
-def pick_best_word_faster(hand, rearrange_dict):
+def pick_best_word_faster(hand, rearranged_dict):
     """ Note:
-        rearange_dict: 'sorted_letters':['orig_word', score]
+        rearanged_dict: 'sorted_letters':['orig_word', score]
     """
-    pass
+    # get all non-empty subsets frm the letters in hand
+    subs = []
+    for letter in hand.keys():
+        subs.append( list(letter * rep for rep in range(hand[letter]+1)) )
+        
+    # all possible combinations from hand
+    possible_words = []
+    for c in itertools.product(*subs):
+        if ''.join(c):
+            possible_words.append(''.join(c))
 
+    # check over possible words
+    best_word = '.'
+    highest_score = 0
+
+    for word in possible_words:
+        sorted_w = ''.join(sorted(word))
+        if sorted_w in rearranged_dict.keys():
+            score = rearranged_dict[sorted_w][1]
+
+            if len(sorted_w) == HAND_SIZE:
+                score = score + BONUS
+
+            if highest_score < score:
+                highest_score = score  
+                best_word = rearranged_dict[sorted_w][0]
+                
+    return (best_word, highest_score)
 
 
 def get_time_limit(points_dict, k):
@@ -316,7 +343,8 @@ def play_hand(hand, word_point_dict, time_limit):
         display_hand(remained_hand)
         start_time = time.time()
         #user_input = raw_input("Enter word to score or a '.' to indicate finishing game >")
-        new_input, new_score = pick_best_word(remained_hand, word_point_dict)
+        #new_input, new_score = pick_best_word(remained_hand, word_point_dict)
+        new_input, new_score = pick_best_word_faster(remained_hand, word_point_dict)
         end_time = time.time()
         spent_time = end_time - start_time
         print "It took %.2fs to provide an answer: '%s'" %(spent_time, new_input)
