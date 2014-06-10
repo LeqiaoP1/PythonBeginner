@@ -111,12 +111,14 @@ class ShapeSet:
             raise StopIteration
 
 
+
     def __str__(self):
         """
         Return the string representation for a set, which consists of
         the string representation of each shape, categorized by type
         (circles, then squares, then triangles)
         """
+
         ss = ""
         for sh in self.sh_list:
             ss = ss + str(sh) + '\n'
@@ -136,6 +138,7 @@ class ShapeSet:
             """
         return self
 
+
 #
 # Problem 3: Find the largest shapes in a ShapeSet
 #
@@ -145,7 +148,7 @@ def findLargest(shapes):
        largest area.
     shapes: ShapeSet
     """
-    max_area = 0.0
+   max_area = 0.0
     max_shapes = []
     for sh in shapes:
         if sh.area() > max_area:
@@ -159,6 +162,7 @@ def findLargest(shapes):
 
 
 
+
 #
 # Problem 4: Read shapes from a file into a ShapeSet
 #
@@ -168,6 +172,7 @@ def readShapesFromFile(filename):
     Creates and returns a ShapeSet with the shapes found.
     filename: string
     """
+
     f = open(filename,'r')
     cs = ShapeSet()
     ss = ShapeSet()
