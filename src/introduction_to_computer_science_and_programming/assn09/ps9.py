@@ -148,7 +148,7 @@ def findLargest(shapes):
        largest area.
     shapes: ShapeSet
     """
-   max_area = 0.0
+    max_area = 0.0
     max_shapes = []
     for sh in shapes:
         if sh.area() > max_area:
