@@ -2,6 +2,7 @@
 * Python interpreter 2.7.3
 * "flake8" as static stytax-/style checker [see](./lint.sh)
 * "nose" as Unit-Testing Framework [see](./run_test.sh)
+* "wxPython" (install python-wxgtk2.8) as toolkit to make GUI
 
 ## course list
 1. [Learn Python The Hard Way, 2nd Ed.](http://sebug.net/paper/books/LearnPythonTheHardWay/index.html)

@@ -23,7 +23,7 @@ def testHand():
     """
     h = Hand(8, {'a':3, 'b':2, 'd':3})
     h.update('bad')
-    testResult(h.containsLetters('aabdd') and not h.isEmpty())
+    testResult(h.containsLetters('aabdd') and not h.isEmpty() and not h.containsLetters('aaa'))
     h.update('dad')
     testResult(h.containsLetters('ab') or not h.isEmpty())
     h.update('ab')
@@ -54,8 +54,8 @@ def testAll():
 
     print "Uncomment the tests in this file as you complete each problem."
 
-    # print 'PROBLEM 2 -----------------------------------------'
-    # testHand()
+    print 'PROBLEM 2 -----------------------------------------'
+    testHand()
 
     # print 'PROBLEM 3 -----------------------------------------'
     # testPlayer()

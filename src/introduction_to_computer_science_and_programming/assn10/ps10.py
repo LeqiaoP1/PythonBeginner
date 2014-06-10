@@ -69,6 +69,7 @@ class Hand(object):
                 initialHandDict[x] = initialHandDict.get(x, 0) + 1
         self.initialSize = handSize
         self.handDict = initialHandDict
+        
     def update(self, word):
         """
         Remove letters in word from this hand.
@@ -76,7 +77,13 @@ class Hand(object):
         word: The word (a string) to remove from the hand
         postcondition: Letters in word are removed from this hand
         """
-        # TODO
+        for letter in word:
+            if self.handDict[letter] == 1:
+                del self.handDict[letter]
+            else:
+                self.handDict[letter] -= 1
+
+    
     def containsLetters(self, letters):
         """
         Test if this hand contains the characters required to make the input
@@ -85,14 +92,23 @@ class Hand(object):
         returns: True if the hand contains the characters to make up letters,
         False otherwise
         """
-        # TODO
+        freq_letter = getFrequencyDict(letters)
+
+        for letter, freq in freq_letter.iteritems():
+            if self.handDict.get(letter, 0) < freq:
+                return False
+
+        return True
+    
+    
     def isEmpty(self):
         """
         Test if there are any more letters left in this hand.
 
         returns: True if there are no letters remaining, False otherwise.
         """
-        # TODO
+        return not self.handDict
+        
     def __eq__(self, other):
         """
         Equality test, for testing purposes
@@ -100,7 +116,9 @@ class Hand(object):
         returns: True if this Hand contains the same number of each letter as
         the other Hand, False otherwise
         """
-        # TODO
+        unmatched_items = set( self.handDict.items()) ^ set( other.handDict.items() )
+        return (len(unmatched_items) == 0)
+        
     def __str__(self):
         """
         Represent this hand as a string
