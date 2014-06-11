@@ -9,8 +9,8 @@
 
 import time
 
-#SUBJECT_FILENAME = "subjects.txt"
-SUBJECT_FILENAME = "subjects_small.txt"
+SUBJECT_FILENAME = "subjects.txt"
+#SUBJECT_FILENAME = "subjects_small.txt"
 VALUE, WORK = 0, 1
 
 #
@@ -74,7 +74,7 @@ def cmpWork(subInfo1, subInfo2):
     """
     work1 = subInfo1[WORK]
     work2 = subInfo2[WORK]
-    return  work1 - work2
+    return  work2 - work1
 
 def cmpRatio(subInfo1, subInfo2):
     """
@@ -85,7 +85,9 @@ def cmpRatio(subInfo1, subInfo2):
     val2 = subInfo2[VALUE]
     work1 = subInfo1[WORK]
     work2 = subInfo2[WORK]
-    return float(val1) / work1 - float(val2) / work2
+    ratio1 = float(val1) / work1
+    ratio2 = float(val2) / work2
+    return 1 if ratio1 > ratio2 else -1 if ratio1 < ratio2 else 0
 
 #
 # Problem 2: Subject Selection By Greedy Optimization
@@ -106,7 +108,7 @@ def greedyAdvisor(subjects, maxWork, comparator):
     total_work = 0
     for k, v in sorted(subjects.items(), cmp=comparator, key=lambda x:x[1], reverse=True):
         if (v[WORK] + total_work <= maxWork):
-            print "selet: ", k, " ", v
+            print "greedy select: %r" %k, "\t", v
             total_work = total_work + v[WORK]
             sol_dict[k] = v
 
@@ -137,6 +139,14 @@ def bruteForceAdvisor(subjects, maxWork):
 
 def bruteForceAdvisorHelper(subjects, maxWork, i, bestSubset, bestSubsetValue,
                             subset, subsetValue, subsetWork):
+    """
+        It is a tail-recursion to avoid stack overflow
+        Return the best subset within the subjects[i..End-1]
+        
+        in which,
+        "bestSubsetValue"                   best for the subjects[0..i-1],
+        "subset, subsetValue, subsetWork"   selection for the subjects[0..i-1]         
+    """
     # Hit the end of the list.
     if i >= len(subjects):
         if bestSubset == None or subsetValue > bestSubsetValue:
@@ -154,10 +164,15 @@ def bruteForceAdvisorHelper(subjects, maxWork, i, bestSubset, bestSubsetValue,
                     maxWork, i+1, bestSubset, bestSubsetValue, subset,
                     subsetValue + s[VALUE], subsetWork + s[WORK])
             subset.pop()
+
+        # not including subjects[i]
         bestSubset, bestSubsetValue = bruteForceAdvisorHelper(subjects,
                 maxWork, i+1, bestSubset, bestSubsetValue, subset,
                 subsetValue, subsetWork)
+        
         return bestSubset, bestSubsetValue
+
+
 
 #
 # Problem 3: Subject Selection By Brute Force
@@ -167,7 +182,16 @@ def bruteForceTime():
     Runs tests on bruteForceAdvisor and measures the time required to compute
     an answer.
     """
-    # TODO...
+    subjs = loadSubjects(SUBJECT_FILENAME)
+    maxWork = raw_input("give the max total work value(an integer): ")
+    start_time = time.time()
+    selected_subjs = bruteForceAdvisor(subjs, int(maxWork))
+    end_time = time.time()
+
+    printSubjects(selected_subjs)
+    
+    print "comsumed time %.2fs " %(end_time - start_time)
+
 
 # Problem 3 Observations
 # ======================
