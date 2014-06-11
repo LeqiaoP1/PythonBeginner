@@ -38,6 +38,12 @@ def testPlayer():
     p.addPoints(5.)
     p.addPoints(12.)
     testResult(isClose(p.getPoints(), 17))
+    p2 = Player(2, Hand(3, {'c':1, 'a':1, 'b':1 }))
+    testResult( p > p2 )
+    p2.addPoints(p.getPoints())
+    testResult( p == p2 )
+    p2.addPoints(0.1)
+    testResult( p < p2 )
 
 def testComputerPlayer():
     """
@@ -46,6 +52,9 @@ def testComputerPlayer():
     wordlist = Wordlist()
     p = ComputerPlayer(1, Hand(6, {'c':1, 'a':1, 'b':1 ,'d':1, 'o':1, 'e':1}))
     testResult(getWordScore(p.pickBestWord(wordlist)) == getWordScore('abode'))
+    
+    p2 = ComputerPlayer(2, Hand(5, {'a':1, 'b':1 ,'d':1, 'i':1, 'e':1}))
+    testResult(getWordScore(p2.pickBestWord(wordlist)) == getWordScore('abide'))
 
 def testAll():
     """
@@ -57,10 +66,10 @@ def testAll():
     print 'PROBLEM 2 -----------------------------------------'
     testHand()
 
-    # print 'PROBLEM 3 -----------------------------------------'
-    # testPlayer()
+    print 'PROBLEM 3 -----------------------------------------'
+    testPlayer()
 
-    # print 'PROBLEM 4 -----------------------------------------'
-    # testComputerPlayer()
+    print 'PROBLEM 4 -----------------------------------------'
+    testComputerPlayer()
 
 testAll()
