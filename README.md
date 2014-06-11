@@ -1,6 +1,5 @@
 ## System Setup & Packages
 * Python interpreter 2.7.3
-
 * Ubuntu 12.10 (both 32bit and 64bit)
 * "flake8" as static style checker [lint.sh](./lint.sh)
 * "nose" as Unit-Testing Framework [run_test.sh](./run_test.sh)
