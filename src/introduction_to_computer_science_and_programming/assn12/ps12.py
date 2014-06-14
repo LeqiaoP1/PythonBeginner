@@ -414,12 +414,39 @@ def problem5():
     150, 75, 0 timesteps (followed by an additional 150 timesteps of
     simulation).    
     """
-    # TODO
+    delays = [300, 225, 150, 75, 0]
+    final_pop = []
+
+    virues = [ResistantVirus(0.1, 0.05, {'guttagonol':False}, 0.005) for i in range(100)]
     
+    for delay in delays:
+        print "simulation for %d steps delay"%(delay)
+        y_pop = [0 for t in range(delay+150)]
+        
+        patient = Patient(virues, 1000)
+        for t in range(delay):
+            patient.update()
+            y_pop[t] = patient.getTotalPop()
+
+        patient.addPrescription('guttagonol')
+
+        for t in range(delay, delay+150):
+            patient.update()
+            y_pop[t] = patient.getTotalPop()
+        
+        final_pop.append(y_pop[-1])
+
+    pylab.bar(delays, final_pop, width=5)
+    pylab.title("delay effect of drug treatment")
+    pylab.xlabel("delay before the 150 steps long treatment")
+    pylab.ylabel("total number of viruses after treatment")
+    pylab.show()
+
+
 #
 # PROBLEM 6
 #
-
+import matplotlib.pyplot as plt
 def problem6():
     """
     Runs simulations and make histograms for problem 6.
@@ -431,7 +458,53 @@ def problem6():
     150, 75, 0 timesteps between adding drugs (followed by an additional 150
     timesteps of simulation).
     """
-    # TODO
+    delays = sorted([300, 225, 150, 75, 0])
+    treatments = [['guttagonol'], ['grimpex'], ['new']]
+    #treatments = [['guttagonol'], ['guttagonol', 'grimpex']]
+    final_pop = []
+
+    virues = [ResistantVirus(0.1, 0.05, {'guttagonol':False, 'grimpex':False, 'new':False}, 0.005) for i in range(100)]
+
+    for treatment in treatments:
+        y_pop_delays = []
+        for delay in delays:
+            print "simulation for %d steps delay"%(delay)
+            y_pop = [0 for t in range(delay+150)]
+
+            # new patient for study
+            patient = Patient(virues, 1000)
+            for t in range(delay):
+                patient.update()
+                y_pop[t] = patient.getTotalPop()
+
+            # apply all given drugs
+            for drug in treatment:
+                patient.addPrescription(drug)
+
+            for t in range(delay, delay+150):
+                patient.update()
+                y_pop[t] = patient.getTotalPop()
+
+            y_pop_delays.append(y_pop[-1])
+            
+        final_pop.append(y_pop_delays)
+
+
+    print final_pop
+    # visualization
+    
+    bar_w = 5
+    x_shift = 0
+    colors = ['r', 'b', 'g']
+    for i in range(len(treatments)):
+        plt.bar([(x + x_shift) for x in delays], final_pop[i], bar_w, color=colors[i], label=str(treatments[i]))
+        x_shift += bar_w
+
+    plt.legend()
+    plt.title("delay effect of drug treatment")
+    plt.xlabel("delay before the 150 steps long treatment")
+    plt.ylabel("total number of viruses after treatment")
+    plt.show()
 
 #
 # PROBLEM 7
@@ -468,4 +541,5 @@ def test_resistance():
 
 if __name__ == "__main__":
     #test_resistance()
-    pass
+    problem5()
+    #pass
