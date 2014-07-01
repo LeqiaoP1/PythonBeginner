@@ -4,6 +4,7 @@
 * "flake8" as static style checker [lint.sh](./lint.sh)
 * "nose" as Unit-Testing Framework [run_test.sh](./run_test.sh)
 * "wxPython" (install python-wxgtk2.8) Toolkit for making GUI
+* Template Project "pyempty" // as an example for full featured python project
 
 ## Course List
 1. [Learn Python The Hard Way, 2nd Ed.](http://sebug.net/paper/books/LearnPythonTheHardWay/index.html)
