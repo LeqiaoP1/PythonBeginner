@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1eec2bfd-82ef-47a1-9812-595f8063933e}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>setup.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="pyempty\setup.py" />
+    <Compile Include="pyempty\src\pyempty\config.py" />
+    <Compile Include="pyempty\src\pyempty\__init__.py" />
+    <Compile Include="pyempty\test\test_pyempty.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn00\ps0.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn00\__init__.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn01\ps1a.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn01\ps1b.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn01\__init__.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn02\ps2a.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn02\ps2b.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn02\__init__.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn03\ps3a.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn03\ps3b.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn03\ps3c.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn03\ps3d.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn03\ps3_template.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn03\__init__.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn04\ps4.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn04\__init__.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn05_06\ps5.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn05_06\ps5_ghost.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn05_06\ps6.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn05_06\test_ps5.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn08\ps8.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn09\ps9.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn10\ps10.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn10\ps10_gui.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn10\ps10_test.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn11\ps11.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn11\ps11_visualize.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\assn12\ps12.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\final\problem.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\quiz2\problems.py" />
+    <Compile Include="src\introduction_to_computer_science_and_programming\__init__.py" />
+    <Compile Include="src\learn_python_the_hard_way\ex_all.py" />
+    <Compile Include="src\learn_python_the_hard_way\__init__.py" />
+    <Compile Include="src\__init__.py" />
+    <Compile Include="test\test_ex.py" />
+    <Compile Include="test\test_ICSP.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pyempty\ChangeLog.txt" />
+    <Content Include="pyempty\LICENES.txt" />
+    <Content Include="pyempty\requirements.txt" />
+    <Content Include="src\introduction_to_computer_science_and_programming\assn05_06\words.txt" />
+    <Content Include="src\introduction_to_computer_science_and_programming\assn08\subjects.txt" />
+    <Content Include="src\introduction_to_computer_science_and_programming\assn08\subjects_small.txt" />
+    <Content Include="src\introduction_to_computer_science_and_programming\assn08\subjects_small.txt~" />
+    <Content Include="src\introduction_to_computer_science_and_programming\assn09\shapes.txt" />
+    <Content Include="src\introduction_to_computer_science_and_programming\assn10\words.txt" />
+    <Content Include="src\learn_python_the_hard_way\ex15_sample.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pyempty" />
+    <Folder Include="pyempty\src\" />
+    <Folder Include="pyempty\src\pyempty" />
+    <Folder Include="pyempty\test" />
+    <Folder Include="src" />
+    <Folder Include="src\introduction_to_computer_science_and_programming" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn00" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn01" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn02" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn03" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn04" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn05_06" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn08" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn09" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn10" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn11" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\assn12" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\final" />
+    <Folder Include="src\introduction_to_computer_science_and_programming\quiz2" />
+    <Folder Include="src\learn_python_the_hard_way" />
+    <Folder Include="test" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\2.7" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
